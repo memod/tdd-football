@@ -11,4 +11,8 @@ public class Championship {
     public int getNumberOfMatches() {
         return scoreTable.length;
     }
+
+    public String getMatch(int matchNumber) {
+        return scoreTable[matchNumber];
+    }
 }

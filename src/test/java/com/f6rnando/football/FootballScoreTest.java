@@ -15,7 +15,7 @@ public class FootballScoreTest {
     // A matched game score 1 point
 
     @Test
-    public void aChampionshipHas10Matches() {
+    public void aFinishedChampionshipHas10Matches() {
         // Setup
         String[] scoreTable = {"2:0", "1:0", "0:1", "2:2", "1:2", "1:2", "2:4", "4:0", "4:4", "0:0"};
         Championship championship = new Championship();
@@ -26,7 +26,39 @@ public class FootballScoreTest {
         championship.setScoreTable(scoreTable);
         numberOfMatches = championship.getNumberOfMatches();
 
-        //Assert
+        // Assert
         assertEquals(expectedMatches, numberOfMatches);
+    }
+
+    @Test
+    public void aNotStartedChampionshipHas0Matches() {
+        // Setup
+        String[] scoreTable = {};
+        Championship championship = new Championship();
+        int numberOfMatches;
+
+        // Act
+        int expectedMatches = 0;
+        championship.setScoreTable(scoreTable);
+        numberOfMatches = championship.getNumberOfMatches();
+
+        // Assert
+        assertEquals(expectedMatches, numberOfMatches);
+    }
+
+    @Test
+    public void aMatchHasScoreForTwoTeams() {
+        // Setup
+        String[] scoreTable = {"2:0", "1:0", "0:1", "2:2", "1:2", "1:2", "2:4", "4:0", "4:4", "0:0"};
+        Championship championship = new Championship();
+
+        // Act
+        int expectedQuantity = 2;
+        championship.setScoreTable(scoreTable);
+        String match = championship.getMatch(3);
+        int scoreQuantity = match.split(":").length;
+
+        // Assert
+        assertEquals(expectedQuantity, scoreQuantity);
     }
 }
